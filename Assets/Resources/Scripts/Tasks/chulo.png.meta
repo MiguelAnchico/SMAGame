@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chulo_0: 6581669546313315997
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
