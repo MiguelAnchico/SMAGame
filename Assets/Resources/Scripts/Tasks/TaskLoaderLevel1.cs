@@ -9,10 +9,10 @@ public class TaskLoaderLevel1 : MonoBehaviour
 
     void Start()
     {
-        taskManager.AddTask(new Task(1, "Recoger la linterna", "Está sobre la mesa", 10f));
-        taskManager.AddTask(new Task(2, "Hablar con el anciano", "Encuéntralo junto a la fogata", 15f));
+        taskManager.AddTask(new Task(1, "Aprende a moverte", "Desplazate hacia la derecha hasta que desaparezca el mensaje", 10f));
+        taskManager.AddTask(new Task(2, "Aprende a saltar", "Salta sobre el primer mensaje de como saltar", 15f));
         taskManager.AddTask(new Task(3, "Cruzar el puente", "Activa la palanca para bajarlo", 20f));
 
-        uiManager.UpdateTaskList(); // Se actualiza la UI al inicio
+        uiManager.UpdateTaskList();
     }
 }

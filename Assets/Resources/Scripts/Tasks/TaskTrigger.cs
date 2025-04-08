@@ -13,7 +13,6 @@ public class TaskTrigger : MonoBehaviour
         {
             TaskManager.Instance.CompleteTask(taskIdToComplete);
             uiManager.UpdateTaskList(); // Refresca los chulitos
-            gameObject.SetActive(false); // Opcional
         }
     }
 }

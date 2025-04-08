@@ -1768,6 +1768,7 @@ MonoBehaviour:
   saveFileName: game_data
   encryptionPassword: 
   searchInEntireScene: 0
+  delayBeforeUnfreeze: 0.2
 --- !u!4 &1067815460
 Transform:
   m_ObjectHideFlags: 0
@@ -2920,6 +2921,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1067815460}
   - {fileID: 783332101}
   - {fileID: 361471945}
   - {fileID: 1817230506}
@@ -2931,4 +2933,3 @@ SceneRoots:
   - {fileID: 364179812}
   - {fileID: 1281750973}
   - {fileID: 177474145}
-  - {fileID: 1067815460}
