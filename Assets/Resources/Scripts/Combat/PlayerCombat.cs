@@ -63,6 +63,13 @@ public class PlayerCombat : MonoBehaviour
     public delegate void AttackHitHandler(GameObject target, float damage);
     public static event AttackHitHandler OnAttackHit;
 
+
+    [SerializeField] private AudioClip ataqueBasicoSonido;
+
+    [SerializeField] private AudioClip ataqueAreaSonido;
+
+    [SerializeField] private AudioClip ataqueEspecialSonido;
+
     private void Awake()
     {
         // Inicializar referencias
@@ -183,6 +190,8 @@ public class PlayerCombat : MonoBehaviour
         if (animator != null)
             animator.SetTrigger("BasicAttack");
         
+            ControladorSonido.Instance.EjecutarSonido(ataqueBasicoSonido);
+
         // Esperar a que la animación llegue al frame de daño (ajustar tiempo)
         yield return new WaitForSeconds(0.2f);
         
@@ -195,6 +204,7 @@ public class PlayerCombat : MonoBehaviour
         
         // Disparar evento de ataque realizado
         OnAttackPerformed?.Invoke(ATTACK_BASIC);
+
         
         // Notificar que se ha golpeado a los enemigos
         foreach (Collider2D enemy in hitEnemies)
@@ -230,6 +240,8 @@ public class PlayerCombat : MonoBehaviour
         // Reproducir animación si existe
         if (animator != null)
             animator.SetTrigger("AreaAttack");
+
+            ControladorSonido.Instance.EjecutarSonido(ataqueAreaSonido);
         
         // Esperar a que la animación llegue al frame de daño
         yield return new WaitForSeconds(0.3f);
@@ -263,6 +275,7 @@ public class PlayerCombat : MonoBehaviour
         
         // Disparar evento de fin de ataque
         OnAttackFinished?.Invoke(ATTACK_AREA);
+
         
         isAttacking = false;
     }
@@ -278,6 +291,8 @@ public class PlayerCombat : MonoBehaviour
         // Reproducir animación si existe
         if (animator != null)
             animator.SetTrigger("SpecialAttack");
+
+            ControladorSonido.Instance.EjecutarSonido(ataqueEspecialSonido);
         
         // Esperar carga del ataque
         yield return new WaitForSeconds(0.5f);

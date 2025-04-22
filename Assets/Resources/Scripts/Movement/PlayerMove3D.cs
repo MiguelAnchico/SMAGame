@@ -37,6 +37,9 @@ public class PlayerMove3D : MonoBehaviour
     
     // Lista de objetos interactuables en rango
     private List<GameObject> interactablesInRange = new List<GameObject>();
+
+
+    [SerializeField] private AudioClip saltoSonido;
     
     private void Awake()
     {
@@ -128,6 +131,7 @@ public class PlayerMove3D : MonoBehaviour
         if (jumpPressed && isGrounded && jumpReleased)
         {
             TryJump();
+
         }
         
         // Detectar movimiento vertical para saltar
@@ -159,6 +163,7 @@ public class PlayerMove3D : MonoBehaviour
         if (context.performed)
         {
             jumpPressed = true;
+            ControladorSonido.Instance.EjecutarSonido(saltoSonido);
         }
         else if (context.canceled)
         {
