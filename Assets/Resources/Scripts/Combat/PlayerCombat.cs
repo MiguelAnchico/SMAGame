@@ -120,7 +120,7 @@ public class PlayerCombat : MonoBehaviour
             }
             else if (control.path.EndsWith("/buttonWest"))
             {
-                // Botón Oeste - Ataque Especial
+               // Botón Oeste - Ataque Especial
                 Debug.Log("Botón Oeste presionado: Ataque Especial");
                 TrySpecialAttack();
             }
