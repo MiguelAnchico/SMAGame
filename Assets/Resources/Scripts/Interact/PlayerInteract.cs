@@ -7,15 +7,14 @@ using UnityEngine.UI;
 
 public class PlayerInteract : MonoBehaviour
 {     
-    private bool canInteract = true;
+       private bool canInteract = true;
     private bool isNearNPC = false;
+    private NPC currentNPC;  // El NPC con el que el jugador está interactuando
 
     public GameObject interactionPanel;  // Panel que muestra el mensaje de "Interactuar" con el NPC
     public GameObject dialoguePanel;  // Panel donde se muestra el diálogo con el NPC
     public DialogueManager dialogueManager;  // El DialogueManager que controla el flujo del diálogo
     public NPCDialogue npcDialogue;  // El diálogo del NPC actual
-
-    
 
     public void OnInteract(InputAction.CallbackContext context)
     {
@@ -44,8 +43,11 @@ public class PlayerInteract : MonoBehaviour
         }
         else
         {
-            // Si el diálogo ha terminado, iniciamos un nuevo diálogo
-            dialogueManager.StartDialogue(npcDialogue);
+            // Si el diálogo ha terminado, iniciamos un nuevo diálogo con el NPC actual
+            if (currentNPC != null)
+            {
+                dialogueManager.StartDialogue(currentNPC.npcDialogue);  // Usamos el NPCDialogue del NPC actual
+            }
         }
     }
 
@@ -53,8 +55,12 @@ public class PlayerInteract : MonoBehaviour
     {
         if (other.CompareTag("NPC"))  // Asegúrate de que tus NPCs tengan el tag 'NPC'
         {
-            isNearNPC = true;
-            interactionPanel.SetActive(true);  // Mostrar el panel de "Interactuar"
+            currentNPC = other.GetComponent<NPC>();  // Obtenemos el NPC con el que el jugador está cerca
+            if (currentNPC != null)
+            {
+                isNearNPC = true;
+                interactionPanel.SetActive(true);  // Mostrar el panel de "Interactuar"
+            }
         }
     }
 
@@ -63,6 +69,7 @@ public class PlayerInteract : MonoBehaviour
         if (other.CompareTag("NPC"))
         {
             isNearNPC = false;
+            currentNPC = null;  // Limpiar la referencia al NPC
             interactionPanel.SetActive(false);  // Ocultar el panel de "Interactuar"
         }
     }
