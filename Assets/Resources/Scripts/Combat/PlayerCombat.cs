@@ -182,50 +182,42 @@ public class PlayerCombat : MonoBehaviour
     private IEnumerator PerformBasicAttack()
     {
         isAttacking = true;
-        
+
         // Disparar evento de inicio de ataque
         OnAttackStarted?.Invoke(ATTACK_BASIC);
-        
+
         // Reproducir animación si existe
-        if (animator != null)
-            animator.SetTrigger("BasicAttack");
-        
-            ControladorSonido.Instance.EjecutarSonido(ataqueBasicoSonido);
+        if (animator != null) {
+            animator.SetTrigger("isBasicAttack");
+            animator.SetTrigger("isAttack");
+
+            animator.ResetTrigger("isSpecialAttack");
+            animator.ResetTrigger("isAreaAttack");
+        }
+
+        ControladorSonido.Instance.EjecutarSonido(ataqueBasicoSonido);
 
         // Esperar a que la animación llegue al frame de daño (ajustar tiempo)
         yield return new WaitForSeconds(0.2f);
-        
-        // Detectar enemigos en rango
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
-            attackPoint.position, 
-            basicAttackRange, 
-            enemyLayers
-        );
-        
+        animator.ResetTrigger("isBasicAttack");
+        animator.ResetTrigger("isAttack");
+
         // Disparar evento de ataque realizado
         OnAttackPerformed?.Invoke(ATTACK_BASIC);
 
-        
-        // Notificar que se ha golpeado a los enemigos
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            // Enviar evento con el objetivo y el daño
-            OnAttackHit?.Invoke(enemy.gameObject, basicAttackDamage);
-            Debug.Log("Ataque básico conectado: " + enemy.name);
-        }
-        
         // Instanciar efecto visual
         if (basicAttackEffect != null)
         {
-            Instantiate(basicAttackEffect, attackPoint.position, Quaternion.identity);
+            GameObject attackInstance = Instantiate(basicAttackEffect, attackPoint.position, Quaternion.identity);
+            attackInstance.transform.SetParent(transform);
         }
-        
+
         // Esperar a que termine la animación
         yield return new WaitForSeconds(0.3f);
-        
+
         // Disparar evento de fin de ataque
         OnAttackFinished?.Invoke(ATTACK_BASIC);
-        
+
         isAttacking = false;
     }
 
@@ -238,14 +230,21 @@ public class PlayerCombat : MonoBehaviour
         OnAttackStarted?.Invoke(ATTACK_AREA);
         
         // Reproducir animación si existe
-        if (animator != null)
-            animator.SetTrigger("AreaAttack");
+        if (animator != null) {
+            animator.SetTrigger("isAreaAttack");
+            animator.SetTrigger("isAttack");
+
+            animator.ResetTrigger("isSpecialAttack");
+            animator.ResetTrigger("isBasicAttack");
+        }
 
             ControladorSonido.Instance.EjecutarSonido(ataqueAreaSonido);
         
         // Esperar a que la animación llegue al frame de daño
         yield return new WaitForSeconds(0.3f);
-        
+        animator.ResetTrigger("isAreaAttack");
+        animator.ResetTrigger("isAttack");
+
         // Detectar enemigos en un área más grande
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
             transform.position, // Desde el centro del jugador
@@ -267,7 +266,8 @@ public class PlayerCombat : MonoBehaviour
         // Instanciar efecto visual
         if (areaAttackEffect != null)
         {
-            Instantiate(areaAttackEffect, transform.position, Quaternion.identity);
+            GameObject areaAttackInstance = Instantiate(areaAttackEffect, transform.position, Quaternion.identity);
+            areaAttackInstance.transform.SetParent(transform);
         }
         
         // Esperar a que termine la animación
@@ -289,14 +289,21 @@ public class PlayerCombat : MonoBehaviour
         OnAttackStarted?.Invoke(ATTACK_SPECIAL);
         
         // Reproducir animación si existe
-        if (animator != null)
-            animator.SetTrigger("SpecialAttack");
+        if (animator != null) {
+            animator.SetTrigger("isSpecialAttack");
+            animator.SetTrigger("isAttack");
+
+            animator.ResetTrigger("isBasicAttack");
+            animator.ResetTrigger("isAreaAttack");
+        }
 
             ControladorSonido.Instance.EjecutarSonido(ataqueEspecialSonido);
         
         // Esperar carga del ataque
         yield return new WaitForSeconds(0.5f);
-        
+        animator.ResetTrigger("isSpecialAttack");
+        animator.ResetTrigger("isAttack");
+
         // Detectar enemigos en una línea recta o un área mayor
         Vector2 direction = new Vector2(transform.localScale.x, 0).normalized;
         RaycastHit2D[] hits = Physics2D.RaycastAll(
@@ -330,12 +337,13 @@ public class PlayerCombat : MonoBehaviour
         if (specialAttackEffect != null)
         {
             GameObject effect = Instantiate(
-                specialAttackEffect, 
-                transform.position, 
+                specialAttackEffect,
+                transform.position,
                 Quaternion.identity
             );
-            
+
             // Orientar el efecto en la dirección correcta
+            effect.transform.SetParent(transform);
             effect.transform.right = direction;
         }
         
