@@ -20,7 +20,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float specialAttackRange = 5f;
 
     [Header("Tiempos de Enfriamiento")]
-    [SerializeField] private float basicAttackCooldown = 0.5f;
+    [SerializeField] private float basicAttackCooldown = 1f;
     [SerializeField] private float areaAttackCooldown = 2f;
     [SerializeField] private float specialAttackCooldown = 5f;
 
@@ -109,25 +109,21 @@ public class PlayerCombat : MonoBehaviour
             if (control.path.EndsWith("/buttonNorth"))
             {
                 // Botón Norte - Ataque Básico
-                Debug.Log("Botón Norte presionado: Ataque Básico");
                 TryBasicAttack();
             }
             else if (control.path.EndsWith("/buttonSouth"))
             {
                 // Botón Sur - Ataque de Área
-                Debug.Log("Botón Sur presionado: Ataque de Área");
                 TryAreaAttack();
             }
             else if (control.path.EndsWith("/buttonWest"))
             {
                // Botón Oeste - Ataque Especial
-                Debug.Log("Botón Oeste presionado: Ataque Especial");
                 TrySpecialAttack();
             }
             else
             {
                 // Fallback - Ataque Básico
-                Debug.Log("Otro botón presionado: " + control.path);
                 TryBasicAttack();
             }
         }
@@ -258,9 +254,9 @@ public class PlayerCombat : MonoBehaviour
         // Notificar que se ha golpeado a los enemigos
         foreach (Collider2D enemy in hitEnemies)
         {
+            Debug.Log("Golpeando a un enemigo");
             // Enviar evento con el objetivo y el daño
             OnAttackHit?.Invoke(enemy.gameObject, areaAttackDamage);
-            Debug.Log("Ataque de área conectado: " + enemy.name);
         }
         
         // Instanciar efecto visual
@@ -329,7 +325,6 @@ public class PlayerCombat : MonoBehaviour
             {
                 // Enviar evento con el objetivo y el daño
                 OnAttackHit?.Invoke(hit.collider.gameObject, specialAttackDamage);
-                Debug.Log("Ataque especial conectado: " + hit.collider.name);
             }
         }
         
@@ -362,7 +357,6 @@ public class PlayerCombat : MonoBehaviour
         if (attackLevel < maxAttackLevel)
         {
             attackLevel++;
-            Debug.Log($"Nivel de ataque aumentado a {attackLevel}");
         }
     }
 
@@ -372,7 +366,6 @@ public class PlayerCombat : MonoBehaviour
         if (attackLevel > 1)
         {
             attackLevel--;
-            Debug.Log($"Nivel de ataque reducido a {attackLevel}");
         }
     }
 
@@ -380,7 +373,6 @@ public class PlayerCombat : MonoBehaviour
     public void SetAttackLevel(int level)
     {
         attackLevel = Mathf.Clamp(level, 1, maxAttackLevel);
-        Debug.Log($"Nivel de ataque establecido a {attackLevel}");
     }
 
     // Obtener el tiempo restante de enfriamiento para un tipo de ataque

@@ -6,6 +6,8 @@ public class Attack : MonoBehaviour
 {
     [SerializeField] private float pushForce = 10f; // Fuerza con la que empujaremos al enemigo
     [SerializeField] private float lifeTime = 0.05f; // Duración del ataque en segundos (50 milisegundos)
+    [SerializeField] private int damageAmount = 20; // Cantidad de daño que inflige este ataque
+    
     private Transform playerTransform; // Referencia a la transformación del jugador
 
     private void Start()
@@ -36,6 +38,19 @@ public class Attack : MonoBehaviour
             {
                 // Aplicamos la fuerza en dirección contraria (multiplicando por -1)
                 enemyRigidbody.AddForce(direction * pushForce, ForceMode2D.Impulse);
+            }
+            
+            // Buscamos el componente IDamageable en el enemigo para aplicar daño
+            IDamageable damageable = collision.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                // Aplicamos el daño al enemigo
+                damageable.TakeDamage(damageAmount);
+                Debug.Log($"Aplicando {damageAmount} de daño a {collision.gameObject.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"El enemigo {collision.gameObject.name} no tiene un componente IDamageable");
             }
         }
     }

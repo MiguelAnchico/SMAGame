@@ -239,17 +239,17 @@ MonoBehaviour:
   basicAttackRange: 1.5
   areaAttackRadius: 3
   specialAttackRange: 5
-  basicAttackCooldown: 0.5
+  basicAttackCooldown: 1
   areaAttackCooldown: 2
   specialAttackCooldown: 5
-  basicAttackEffect: {fileID: 0}
-  areaAttackEffect: {fileID: 0}
-  specialAttackEffect: {fileID: 0}
+  basicAttackEffect: {fileID: 1327527652002491230, guid: af4cc290a4bb648c5b52648ba47942d9, type: 3}
+  areaAttackEffect: {fileID: 1360044386019694547, guid: 1114c215c4904450791b599e80697a91, type: 3}
+  specialAttackEffect: {fileID: 4425706587218141468, guid: cd21ddc017a28439fb78811450be2c1d, type: 3}
   cameraShakeIntensity: 0.5
   cameraShakeDuration: 0.3
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   ataqueBasicoSonido: {fileID: 8300000, guid: 37519732f717d054da2406d17c8259cd, type: 3}
   ataqueAreaSonido: {fileID: 8300000, guid: 27b78bc5bbb05ba4d90a008943839125, type: 3}
   ataqueEspecialSonido: {fileID: 8300000, guid: 01278af76f8c81f4f8b62e366a31455f, type: 3}
@@ -264,8 +264,8 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: cbd0959772cd143a4840ca72613df0a4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
+  m_CullingMode: 2
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
