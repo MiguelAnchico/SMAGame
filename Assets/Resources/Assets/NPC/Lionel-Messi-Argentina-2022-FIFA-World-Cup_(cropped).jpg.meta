@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 81fcdea60fee2486c987ac62ec045e06
+guid: 781bf13945e901b419bd33bb30e7711e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3908959719726389711
-    second: Escena - 7_0
+      213: 215151895811404080
+    second: Lionel-Messi-Argentina-2022-FIFA-World-Cup_(cropped)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Escena - 7_0
+      name: Lionel-Messi-Argentina-2022-FIFA-World-Cup_(cropped)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2806
-        height: 1870
+        width: 250
+        height: 334
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fc91a9f872a6f3630800000000000000
-      internalID: 3908959719726389711
+      spriteID: 0313792628f5cf200800000000000000
+      internalID: 215151895811404080
       vertices: []
       indices: 
       edges: []
@@ -143,8 +143,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Escena - 7_0: 3908959719726389711
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

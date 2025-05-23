@@ -1475,7 +1475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &504987022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2014,6 +2014,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 884237481}
   npcNameText: {fileID: 805968051}
   dialogueText: {fileID: 1809985653}
+  speakerImage: {fileID: 2037773162}
 --- !u!4 &605152004
 Transform:
   m_ObjectHideFlags: 0
@@ -2979,6 +2980,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2037773161}
   - {fileID: 805968050}
   - {fileID: 1809985652}
   m_Father: {fileID: 783332101}
@@ -5361,7 +5363,6 @@ MonoBehaviour:
   interactionPanel: {fileID: 1162740883}
   dialoguePanel: {fileID: 884237481}
   dialogueManager: {fileID: 605152003}
-  npcDialogue: {fileID: 1876794387}
 --- !u!1 &1876794381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5584,11 +5585,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a8518e612b68a4cae45075c8950c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: Federico
   dialogueLines:
-  - Hola, Soy federico
-  - Esta es la prueba de sistema de dialogos
-  - Gracias por funcionar
+  - speakerName: Messi
+    speakerImage: {fileID: 215151895811404080, guid: 781bf13945e901b419bd33bb30e7711e, type: 3}
+    line: Hola, como estas Ronaldo
+  - speakerName: Cristiano
+    speakerImage: {fileID: 5203270505160928798, guid: 537d0b6abd5f00f4f96b6c1be4ef761e, type: 3}
+    line: Bien hermano, y vos?
+  - speakerName: Messi
+    speakerImage: {fileID: 215151895811404080, guid: 781bf13945e901b419bd33bb30e7711e, type: 3}
+    line: Bien hermano
 --- !u!114 &1876794388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5602,6 +5608,81 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcDialogue: {fileID: 1876794387}
+--- !u!1 &2037773160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2037773161}
+  - component: {fileID: 2037773163}
+  - component: {fileID: 2037773162}
+  m_Layer: 5
+  m_Name: Personaje
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2037773161
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037773160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6276, y: 1.6276, z: 1.6276}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 884237482}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -346, y: 167}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2037773162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037773160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.990566, g: 0.8548331, b: 0.4906105, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2037773163
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037773160}
+  m_CullTransparentMesh: 1
 --- !u!1 &2084324114
 GameObject:
   m_ObjectHideFlags: 0
@@ -5772,11 +5853,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a8518e612b68a4cae45075c8950c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: Arturo
   dialogueLines:
-  - Hola, Soy Arturoi
-  - Esta es la prueba de sistema de dialogos
-  - Gracias por funcionar
+  - speakerName: 
+    speakerImage: {fileID: 0}
+    line: 
+  - speakerName: 
+    speakerImage: {fileID: 0}
+    line: 
+  - speakerName: 
+    speakerImage: {fileID: 0}
+    line: 
 --- !u!61 &2146119332
 BoxCollider2D:
   m_ObjectHideFlags: 0

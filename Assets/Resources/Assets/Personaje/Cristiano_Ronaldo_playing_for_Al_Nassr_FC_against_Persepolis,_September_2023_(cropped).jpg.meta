@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 81fcdea60fee2486c987ac62ec045e06
+guid: 537d0b6abd5f00f4f96b6c1be4ef761e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3908959719726389711
-    second: Escena - 7_0
+      213: 5203270505160928798
+    second: Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis,_September_2023_(cropped)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Escena - 7_0
+      name: Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis,_September_2023_(cropped)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2806
-        height: 1870
+        width: 805
+        height: 1053
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fc91a9f872a6f3630800000000000000
-      internalID: 3908959719726389711
+      spriteID: e1e6262d4fab53840800000000000000
+      internalID: 5203270505160928798
       vertices: []
       indices: 
       edges: []
@@ -143,8 +143,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Escena - 7_0: 3908959719726389711
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
