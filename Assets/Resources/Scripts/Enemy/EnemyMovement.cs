@@ -16,6 +16,9 @@ public class EnemyMovement : MonoBehaviour
     public float detectionRange = 5f;
     public Transform player;
 
+    [Header("Comportamiento")]
+    public bool oneWayMovement = false; // Nuevo booleano para ir de A a B y quedarse quieto
+
     [Header("Referencias")]
     private Animator animator; // Referencia al componente Animator
     private SpriteRenderer spriteRenderer; // Referencia al componente SpriteRenderer
@@ -23,6 +26,7 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 initialPosition;
     private Vector3 currentTarget;
     private bool isChasing = false;
+    private bool hasReachedFinalDestination = false; // Para saber si ya llegó al punto B en modo one-way
     private Vector2 lastMoveDirection; // Dirección del último movimiento
 
     // Nombres de parámetros del Animator
@@ -46,8 +50,8 @@ public class EnemyMovement : MonoBehaviour
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        // Determinar si debe perseguir al jugador
-        if (distanceToPlayer < detectionRange)
+        // Solo detectar al jugador si no está en modo one-way movement
+        if (!oneWayMovement && distanceToPlayer < detectionRange)
         {
             isChasing = true;
         }
@@ -66,7 +70,14 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Patrol();
+            if (oneWayMovement)
+            {
+                OneWayMovement();
+            }
+            else
+            {
+                Patrol();
+            }
         }
         
         // Actualizar animaciones
@@ -93,6 +104,33 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    void OneWayMovement()
+    {
+        // Si ya llegó al destino final, no hacer nada
+        if (hasReachedFinalDestination)
+        {
+            return;
+        }
+
+        Vector3 oldPosition = transform.position;
+
+        Vector3 newPosition = Vector2.MoveTowards(transform.position, pointB.position, patrolSpeed * Time.deltaTime);
+        newPosition.z = transform.position.z;
+        transform.position = newPosition;
+
+        // Calcular dirección de movimiento
+        if (transform.position != oldPosition)
+        {
+            lastMoveDirection = (transform.position - oldPosition).normalized;
+        }
+
+        // Verificar si llegó al punto B
+        if (Vector2.Distance(transform.position, pointB.position) < 0.1f)
+        {
+            hasReachedFinalDestination = true;
+        }
+    }
+
     void ChasePlayer()
     {
         Vector3 oldPosition = transform.position;
@@ -111,8 +149,19 @@ public class EnemyMovement : MonoBehaviour
     void UpdateAnimationAndDirection()
     {
         // Determinar si está en movimiento
-        bool isMoving = (Vector2.Distance(transform.position, 
-                         isChasing ? player.position : currentTarget) > 0.1f);
+        bool isMoving = false;
+        
+        if (oneWayMovement)
+        {
+            // En modo one-way, está en movimiento solo si no ha llegado al destino final
+            isMoving = !hasReachedFinalDestination;
+        }
+        else
+        {
+            // En modo normal, está en movimiento si no está cerca del objetivo
+            isMoving = (Vector2.Distance(transform.position, 
+                       isChasing ? player.position : currentTarget) > 0.1f);
+        }
         
         // Actualizar el parámetro isMoving del Animator
         if (animator != null)
@@ -131,6 +180,13 @@ public class EnemyMovement : MonoBehaviour
             // Si el movimiento es hacia la derecha, no voltear el sprite
             spriteRenderer.flipX = (lastMoveDirection.x > 0);
         }
+    }
+
+    // Método público para resetear el estado one-way (útil para reutilizar el enemigo)
+    public void ResetOneWayMovement()
+    {
+        hasReachedFinalDestination = false;
+        currentTarget = pointB.position;
     }
 
     void OnDrawGizmosSelected()

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4a49ee487d8f943d8b78b65dd31a3ef7
+guid: ce5ccf77b7e394f2480a9cf7efbaadd4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1446620085076576300
-    second: cuadro_textos_0
+      213: 2853050544670637378
+    second: verified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cuadro_textos_0
+      name: verified_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 872
-        height: 669
+        x: 3
+        y: 32
+        width: 1019
+        height: 987
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c284fe78d4d631410800000000000000
-      internalID: 1446620085076576300
+      spriteID: 24df351ba52189720800000000000000
+      internalID: 2853050544670637378
       vertices: []
       indices: 
       edges: []

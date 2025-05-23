@@ -9,10 +9,15 @@ public class TaskLoaderLevel1 : MonoBehaviour
 
     void Start()
     {
-        taskManager.AddTask(new Task(1, "Aprende a moverte", "Desplazate hacia la derecha hasta que desaparezca el mensaje", 10f));
-        taskManager.AddTask(new Task(2, "Aprende a saltar", "Salta sobre el primer mensaje de como saltar", 15f));
-        taskManager.AddTask(new Task(3, "Cruzar el puente", "Activa la palanca para bajarlo", 20f));
+        // Crear tareas con tiempo limitado (no infinitas)
+        taskManager.AddTask(new Task(1, "Aprende a moverte", "Alcanza al Dubitador usando el Joystick en pantalla", true, 10f, false));
+        taskManager.AddTask(new Task(2, "Aprende a saltar", "Parece que el Dubitador a dejado trampas por el camino. Saltalas usando el Joystick hacia arriba", true, 15f, false));
+        taskManager.AddTask(new Task(3, "Aprende a atacar", "Usa tu reloj para acabar con el Dubitator", true, 20f, false));
 
-        uiManager.UpdateTaskList();
+        // Ya no es necesario llamar UpdateTaskList() aquí
+        // El UI se actualizará automáticamente cuando el usuario abra el menú
+        // uiManager.UpdateTaskList(); // ← Eliminar esta línea
+        
+        Debug.Log("📋 Tareas del intro cargadas. Se mostrarán cuando el usuario abra el menú.");
     }
 }
