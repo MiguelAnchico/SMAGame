@@ -12,7 +12,7 @@ public class TaskTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             TaskManager.Instance.CompleteTask(taskIdToComplete);
-            uiManager.UpdateTaskList(); // Refresca los chulitos
+            uiManager.UpdateTaskList();
         }
     }
 }
