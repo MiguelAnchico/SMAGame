@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-     public GameObject dialoguePanel;
+    public GameObject dialoguePanel;
     public TextMeshProUGUI npcNameText;
     public TextMeshProUGUI dialogueText;
     public Image speakerImage;
+    
+    public UnityEvent OnDialogueEnd; // Eventos que se ejecutan al terminar el diálogo
 
     private Queue<DialogueLine> dialogueQueue;
     private PlayerInteract interaccionJugador;
@@ -52,5 +55,6 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         dialoguePanel.SetActive(false);
+        OnDialogueEnd?.Invoke();
     }
 }
