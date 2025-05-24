@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 537d0b6abd5f00f4f96b6c1be4ef761e
+guid: d98bffe8c2f144cf0acd49b171b29f8b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5203270505160928798
-    second: Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis,_September_2023_(cropped)_0
+      213: -7645697923300949996
+    second: HUMO (9)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis,_September_2023_(cropped)_0
+      name: HUMO (9)_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 805
-        height: 1053
+        x: 27
+        y: 25
+        width: 282
+        height: 283
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e1e6262d4fab53840800000000000000
-      internalID: 5203270505160928798
+      spriteID: 41084b55f3605e590800000000000000
+      internalID: -7645697923300949996
       vertices: []
       indices: 
       edges: []
@@ -143,8 +143,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis,_September_2023_(cropped)_0: 5203270505160928798
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

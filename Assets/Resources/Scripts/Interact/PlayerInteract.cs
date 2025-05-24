@@ -17,6 +17,7 @@ public class PlayerInteract : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        Debug.Log("Interact action triggered");
         if (context.performed && canInteract && isNearNPC)
         {
             var control = context.control;

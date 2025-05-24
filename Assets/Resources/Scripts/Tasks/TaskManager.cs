@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TaskManager : MonoBehaviour
 {
@@ -11,8 +12,19 @@ public class TaskManager : MonoBehaviour
     [Header("References")]
     public TaskUIManager taskUIManager;
     public NotificationManager notificationManager;
+    
+    [Header("Completion Events")]
+    public UnityEvent OnAllTasksCompleted; // Evento cuando todas las tareas se completan
+    public UnityEvent OnAllTasksFinished;  // Evento cuando todas las tareas terminan (completadas o fallidas)
+    
+    [Header("Individual Task Events")]
+    public UnityEvent<int> OnTaskCompleted; // Evento cuando se completa una tarea individual (pasa el ID)
+    public UnityEvent<int> OnTaskFailed;    // Evento cuando falla una tarea individual (pasa el ID)
 
     public static TaskManager Instance { get; private set; }
+    
+    private bool allTasksCompletedEventFired = false;
+    private bool allTasksFinishedEventFired = false;
 
     private void Awake()
     {
@@ -46,6 +58,9 @@ public class TaskManager : MonoBehaviour
             task.isCompleted = true;
             Debug.Log($"✅ Tarea completada: {task.title}");
             
+            // Disparar evento de tarea individual completada
+            OnTaskCompleted?.Invoke(id);
+            
             // Mostrar notificación de tarea completada
             if (notificationManager != null)
             {
@@ -57,6 +72,9 @@ public class TaskManager : MonoBehaviour
             {
                 taskUIManager.SetTaskImageState(id, TaskUIManager.TaskState.Completed);
             }
+            
+            // Verificar si todas las tareas están completadas
+            CheckAllTasksCompletion();
             
             // Si la tarea completada era la actual, pasar a la siguiente
             int taskIndex = tasks.FindIndex(t => t.id == id);
@@ -109,6 +127,9 @@ public class TaskManager : MonoBehaviour
         // Si no hay más tareas activas
         currentTaskIndex = -1;
         Debug.Log("🎉 ¡Todas las tareas completadas o fallidas!");
+        
+        // Verificar eventos de finalización
+        CheckAllTasksCompletion();
     }
 
     public List<Task> GetTasks() => tasks;
@@ -144,6 +165,9 @@ public class TaskManager : MonoBehaviour
                     // Marcar la tarea como fallida
                     currentTask.MarkAsFailed();
                     
+                    // Disparar evento de tarea individual fallida
+                    OnTaskFailed?.Invoke(currentTask.id);
+                    
                     // Mostrar notificación de tarea fallida
                     if (notificationManager != null)
                     {
@@ -155,6 +179,9 @@ public class TaskManager : MonoBehaviour
                     {
                         taskUIManager.SetTaskImageState(currentTask.id, TaskUIManager.TaskState.Incomplete);
                     }
+                    
+                    // Verificar si todas las tareas están terminadas
+                    CheckAllTasksCompletion();
                     
                     // Pasar a la siguiente tarea
                     MoveToNextIncompleteTask();
@@ -198,5 +225,77 @@ public class TaskManager : MonoBehaviour
                            (i == currentTaskIndex ? "🎯 En progreso" : "⏸️ Pendiente");
             Debug.Log($"Tarea {i + 1}: {task.title} - {status}");
         }
+    }
+
+    void CheckAllTasksCompletion()
+    {
+        if (tasks.Count == 0) return;
+        
+        int completedTasks = 0;
+        int finishedTasks = 0; // Completadas + fallidas
+        
+        foreach (Task task in tasks)
+        {
+            if (task.isCompleted)
+            {
+                completedTasks++;
+                finishedTasks++;
+            }
+            else if (task.isFailed)
+            {
+                finishedTasks++;
+            }
+        }
+        
+        // Verificar si TODAS las tareas están completadas (exitosamente)
+        if (completedTasks == tasks.Count && !allTasksCompletedEventFired)
+        {
+            allTasksCompletedEventFired = true;
+            Debug.Log("🎊 ¡TODAS LAS TAREAS COMPLETADAS EXITOSAMENTE!");
+            OnAllTasksCompleted?.Invoke();
+        }
+        
+        // Verificar si TODAS las tareas han terminado (completadas o fallidas)
+        if (finishedTasks == tasks.Count && !allTasksFinishedEventFired)
+        {
+            allTasksFinishedEventFired = true;
+            Debug.Log("🏁 ¡TODAS LAS TAREAS HAN TERMINADO!");
+            OnAllTasksFinished?.Invoke();
+        }
+    }
+    
+    // Métodos públicos para obtener estado de finalización
+    public bool AreAllTasksCompleted()
+    {
+        if (tasks.Count == 0) return false;
+        return tasks.TrueForAll(task => task.isCompleted);
+    }
+    
+    public bool AreAllTasksFinished()
+    {
+        if (tasks.Count == 0) return false;
+        return tasks.TrueForAll(task => task.isCompleted || task.isFailed);
+    }
+    
+    public int GetCompletedTasksCount()
+    {
+        return tasks.FindAll(task => task.isCompleted).Count;
+    }
+    
+    public int GetFailedTasksCount()
+    {
+        return tasks.FindAll(task => task.isFailed).Count;
+    }
+    
+    public int GetActiveTasksCount()
+    {
+        return tasks.FindAll(task => task.IsActive()).Count;
+    }
+    
+    // Método para resetear los eventos (útil para reiniciar nivel)
+    public void ResetCompletionEvents()
+    {
+        allTasksCompletedEventFired = false;
+        allTasksFinishedEventFired = false;
     }
 }

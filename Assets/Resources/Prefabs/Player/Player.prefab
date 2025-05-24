@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 7409663100472947228}
   - component: {fileID: 404224701508245185}
   - component: {fileID: 3102149491373705577}
+  - component: {fileID: 166655619406025125}
+  - component: {fileID: 2603476705197036360}
   - component: {fileID: 3226158087060170408}
   m_Layer: 0
   m_Name: Player
@@ -177,7 +179,19 @@ MonoBehaviour:
     m_ActionId: e62997db-0c13-4d25-bd42-8be570b3a43c
     m_ActionName: 'Game/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2603476705197036360}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d97636c4-b477-444a-bd33-3842e33ea161
     m_ActionName: Game/Interact
   - m_PersistentCalls:
@@ -265,7 +279,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: cbd0959772cd143a4840ca72613df0a4, type: 2}
   m_CullingMode: 2
-  m_UpdateMode: 1
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -275,6 +289,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &166655619406025125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9197558955298637913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7186f26affea347d28e952d3085842a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  invulnerabilityTime: 1
+  hitSound: {fileID: 8300000, guid: dcdd73d50164c4d1b82d71b3976a2d42, type: 3}
+  deathSound: {fileID: 8300000, guid: bcf2fe087bf214387a2419584d159ae7, type: 3}
+  deathEffect: {fileID: 0}
+--- !u!114 &2603476705197036360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9197558955298637913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f846e0b23997cbe4e9a171c36a2abf57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionPanel: {fileID: 0}
+  dialoguePanel: {fileID: 0}
+  dialogueManager: {fileID: 0}
 --- !u!61 &3226158087060170408
 BoxCollider2D:
   m_ObjectHideFlags: 0
