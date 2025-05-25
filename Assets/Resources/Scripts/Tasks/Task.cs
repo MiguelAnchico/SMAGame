@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class Task
@@ -15,6 +16,11 @@ public class Task
     public bool infiniteTime; // Nueva variable para tiempo infinito
     public AudioClip audioClip; // Audio para reproducir cuando se muestra la notificación
 
+    [Header("Timer Display")]
+    public string timerTextName = "TimerText"; // Nombre del GameObject con TextMeshPro
+    private TextMeshProUGUI timerText;
+    private bool timerTextFound = false;
+
     public Task(int taskId, string taskTitle, string taskDescription, bool reminder = false, float time = 0f, bool isInfinite = false, AudioClip audio = null)
     {
         id = taskId;
@@ -26,6 +32,7 @@ public class Task
         timeRemaining = time;
         infiniteTime = isInfinite;
         audioClip = audio;
+        timerTextName = "TimerText";
     }
 
     public bool HasReminder()
@@ -51,13 +58,62 @@ public class Task
             timeRemaining -= deltaTime;
             if (timeRemaining < 0)
                 timeRemaining = 0;
+            
+            // Actualizar el texto del timer si es la tarea actual
         }
+            UpdateTimerDisplay();
+    }
+
+    private void UpdateTimerDisplay()
+    {
+        // Solo buscar el texto si no se ha encontrado antes
+        if (!timerTextFound)
+        {
+            FindTimerText();
+        }
+
+        // Actualizar el texto si se encontró y esta es la tarea actual
+        if (timerText != null && IsCurrentTask())
+        {
+            timerText.text = GetTimeRemainingText();
+        }
+    }
+
+    private void FindTimerText()
+    {
+        // Buscar el GameObject por nombre
+        GameObject timerObject = GameObject.Find(timerTextName);
+        
+        if (timerObject != null)
+        {
+            timerText = timerObject.GetComponent<TextMeshProUGUI>();
+            
+            if (timerText != null)
+            {
+                timerTextFound = true;
+                Debug.Log($"Timer text encontrado: {timerTextName}");
+            }
+        }
+    }
+
+    private bool IsCurrentTask()
+    {
+        // Verificar si esta es la tarea actual del TaskManager
+        if (TaskManager.Instance != null)
+        {
+            Task currentTask = TaskManager.Instance.GetCurrentTask();
+            return currentTask != null && currentTask.id == this.id;
+        }
+        return false;
     }
 
     public void MarkAsFailed()
     {
         isFailed = true;
         timeRemaining = 0f;
+        
+        // Actualizar display al fallar
+        UpdateTimerDisplay();
     }
 
     public void SetInfiniteTime(bool infinite)
@@ -67,6 +123,9 @@ public class Task
         {
             timeRemaining = float.MaxValue; // Establecer tiempo muy alto
         }
+        
+        // Actualizar display
+        UpdateTimerDisplay();
     }
 
     public void SetAudioClip(AudioClip audio)
@@ -74,15 +133,22 @@ public class Task
         audioClip = audio;
     }
 
+    public void SetTimerTextName(string textName)
+    {
+        timerTextName = textName;
+        timerTextFound = false; // Resetear para buscar el nuevo texto
+        timerText = null;
+    }
+
     public string GetTimeRemainingText()
     {
         if (isFailed)
         {
-            return "Fallida";
+            return "x";
         }
         else if (isCompleted)
         {
-            return "Completada";
+            return "∞";
         }
         else if (infiniteTime)
         {
@@ -96,7 +162,20 @@ public class Task
         }
         else
         {
-            return "Sin límite";
+            return "∞";
         }
+    }
+
+    // Método público para forzar actualización del display
+    public void ForceUpdateDisplay()
+    {
+        UpdateTimerDisplay();
+    }
+
+    public void OnBecomeCurrentTask()
+    {
+        timerTextFound = false;
+        timerText = null;
+        UpdateTimerDisplay();
     }
 }

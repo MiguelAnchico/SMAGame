@@ -21,6 +21,10 @@ public class TaskManager : MonoBehaviour
     public UnityEvent<int> OnTaskCompleted; // Evento cuando se completa una tarea individual (pasa el ID)
     public UnityEvent<int> OnTaskFailed;    // Evento cuando falla una tarea individual (pasa el ID)
 
+    [Header("Scene-Specific Events")]
+    public UnityEvent OnSceneTasksCompleted; // Eventos específicos de la escena actual
+    public UnityEvent OnSceneTasksFailed;    // Eventos específicos cuando fallan tareas en la escena
+
     public static TaskManager Instance { get; private set; }
     
     private bool allTasksCompletedEventFired = false;
@@ -41,9 +45,22 @@ public class TaskManager : MonoBehaviour
     private void ReconfigureReferences()
     {
         // Buscar el TaskUIManager en la nueva escena
-        if (taskUIManager == null)
+        TaskUIManager newTaskUIManager = FindObjectOfType<TaskUIManager>();
+        
+        if (newTaskUIManager != null && newTaskUIManager != taskUIManager)
         {
-            taskUIManager = FindObjectOfType<TaskUIManager>();
+            // Transferir eventos del nuevo TaskUIManager al singleton
+            TransferEventsFromNewUIManager(newTaskUIManager);
+            
+            // Asignar el nuevo como referencia
+            taskUIManager = newTaskUIManager;
+            
+            // Destruir el nuevo TaskUIManager ya que transferimos sus eventos
+            Destroy(newTaskUIManager.gameObject);
+        }
+        else if (taskUIManager == null)
+        {
+            taskUIManager = newTaskUIManager;
         }
         
         // Buscar el NotificationManager en la nueva escena
@@ -59,6 +76,39 @@ public class TaskManager : MonoBehaviour
         }
 
         Debug.Log($"🔗 Referencias reconfiguradas para nueva escena");
+    }
+
+    private void TransferEventsFromNewUIManager(TaskUIManager newUIManager)
+    {
+        // Verificar si el nuevo UIManager tiene un TaskManager configurado con eventos
+        TaskManager newTaskManager = newUIManager.GetComponent<TaskManager>();
+        
+        if (newTaskManager != null)
+        {
+            // Transferir eventos específicos de la escena
+            if (newTaskManager.OnSceneTasksCompleted != null && newTaskManager.OnSceneTasksCompleted.GetPersistentEventCount() > 0)
+            {
+                OnSceneTasksCompleted = newTaskManager.OnSceneTasksCompleted;
+            }
+            
+            if (newTaskManager.OnSceneTasksFailed != null && newTaskManager.OnSceneTasksFailed.GetPersistentEventCount() > 0)
+            {
+                OnSceneTasksFailed = newTaskManager.OnSceneTasksFailed;
+            }
+            
+            // Transferir otros eventos globales si es necesario
+            if (newTaskManager.OnAllTasksCompleted != null && newTaskManager.OnAllTasksCompleted.GetPersistentEventCount() > 0)
+            {
+                OnAllTasksCompleted = newTaskManager.OnAllTasksCompleted;
+            }
+            
+            if (newTaskManager.OnAllTasksFinished != null && newTaskManager.OnAllTasksFinished.GetPersistentEventCount() > 0)
+            {
+                OnAllTasksFinished = newTaskManager.OnAllTasksFinished;
+            }
+        }
+        
+        Debug.Log($"🔄 Eventos transferidos del TaskUIManager de la nueva escena");
     }
 
     private void Awake()
@@ -93,12 +143,12 @@ public class TaskManager : MonoBehaviour
             task.isCompleted = true;
             Debug.Log($"✅ Tarea completada: {task.title}");
             
-            // Modificar estado de procrastinación al completar tarea
-            if (GameStateManager.Instance != null)
+            // Solo modificar estado de procrastinación si la tarea tiene tiempo
+            if (task.timeRemaining > 0f && GameStateManager.Instance != null)
             {
                 GameStateManager.Instance.SubtractFromState(0.5f);
             }
-            
+
             // Disparar evento de tarea individual completada
             OnTaskCompleted?.Invoke(id);
             
@@ -116,7 +166,9 @@ public class TaskManager : MonoBehaviour
             
             // Verificar si todas las tareas están completadas
             CheckAllTasksCompletion();
-            
+
+            task.GetTimeRemainingText();
+
             // Si la tarea completada era la actual, pasar a la siguiente
             int taskIndex = tasks.FindIndex(t => t.id == id);
             if (taskIndex == currentTaskIndex)
@@ -135,7 +187,8 @@ public class TaskManager : MonoBehaviour
         if (currentTaskIndex != taskIndex)
         {
             currentTaskIndex = taskIndex;
-            
+            tasks[taskIndex].OnBecomeCurrentTask();
+
             // Mostrar notificación de nueva tarea
             if (notificationManager != null)
             {
@@ -298,6 +351,7 @@ public class TaskManager : MonoBehaviour
             allTasksCompletedEventFired = true;
             Debug.Log("🎊 ¡TODAS LAS TAREAS COMPLETADAS EXITOSAMENTE!");
             OnAllTasksCompleted?.Invoke();
+            OnSceneTasksCompleted?.Invoke(); // Ejecutar eventos específicos de escena
         }
         
         // Verificar si TODAS las tareas han terminado (completadas o fallidas)
@@ -306,6 +360,12 @@ public class TaskManager : MonoBehaviour
             allTasksFinishedEventFired = true;
             Debug.Log("🏁 ¡TODAS LAS TAREAS HAN TERMINADO!");
             OnAllTasksFinished?.Invoke();
+            
+            // Si hay tareas fallidas, ejecutar eventos de fallo específicos de escena
+            if (GetFailedTasksCount() > 0)
+            {
+                OnSceneTasksFailed?.Invoke();
+            }
         }
     }
     
