@@ -12,7 +12,10 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public Image speakerImage;
     
-    public UnityEvent OnDialogueEnd; // Eventos que se ejecutan al terminar el diálogo
+    [Header("Panel de Interacción Asociado")]
+    public GameObject associatedInteractionPanel;
+    
+    public UnityEvent OnDialogueEnd;
 
     private Queue<DialogueLine> dialogueQueue;
     private PlayerInteract interaccionJugador;
@@ -32,7 +35,12 @@ public class DialogueManager : MonoBehaviour
             dialogueQueue.Enqueue(line);
         }
 
-        interaccionJugador.interactionPanel.SetActive(false);
+        // Ocultar el panel de interacción asociado a este DialogueManager
+        if (associatedInteractionPanel != null)
+        {
+            associatedInteractionPanel.SetActive(false);
+        }
+        
         dialoguePanel.SetActive(true);
         ShowNextLine();
     }
@@ -55,6 +63,19 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         dialoguePanel.SetActive(false);
+        FindObjectOfType<PlayerInteract>().GetComponent<Rigidbody2D>().gravityScale = 9.71f;
         OnDialogueEnd?.Invoke();
+    }
+
+    // Método público para verificar si el diálogo está activo
+    public bool IsDialogueActive()
+    {
+        return dialoguePanel.activeSelf;
+    }
+
+    // Método público para verificar si hay más líneas
+    public bool HasMoreLines()
+    {
+        return dialogueQueue.Count > 0;
     }
 }

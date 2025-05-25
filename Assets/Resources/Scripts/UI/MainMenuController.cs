@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public GameObject mainMenuPanel;        
-    public GameObject levelSelectionPanel;  
+    public GameObject mainMenuPanel;
+    public GameObject newGamePanel;
+    public GameObject levelSelectionPanel;
 
     void Start()
     {
@@ -18,14 +19,15 @@ public class MainMenuController : MonoBehaviour
     // Method to show the Level Selection panel and hide the Main Menu panel
     public void NewGame()
     {
-        mainMenuPanel.SetActive(false);      
-        levelSelectionPanel.SetActive(true); 
+        mainMenuPanel.SetActive(false);
+        newGamePanel.SetActive(true);
     }
 
     // Method to start the game (load the first level or continue)
     public void ContinueGame()
     {
-        SceneManager.LoadScene("Level");
+        mainMenuPanel.SetActive(false);
+        levelSelectionPanel.SetActive(true);
     }
 
     // Method to exit the game

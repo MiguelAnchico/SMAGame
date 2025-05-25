@@ -8,11 +8,21 @@ public class GameStateManager : MonoBehaviour
     // Estado del juego (0 a 1)
     private float gameState = 0f;
 
+    // Dificultad del nivel (0, 1, 2)
+    private int levelDifficulty = 0;
+
     // Propiedad para acceder y modificar el estado
     public float GameState
     {
         get { return gameState; }
         set { gameState = Mathf.Clamp01(value); }
+    }
+
+    // Propiedad para acceder y modificar la dificultad del nivel
+    public int LevelDifficulty
+    {
+        get { return levelDifficulty; }
+        set { levelDifficulty = Mathf.Clamp(value, 0, 2); }
     }
 
     void Awake()
@@ -43,5 +53,11 @@ public class GameStateManager : MonoBehaviour
     public void SubtractFromState(float amount)
     {
         GameState = Mathf.Clamp01(gameState - amount);
+    }
+
+    // Métodos para modificar la dificultad del nivel
+    public void SetLevelDifficulty(int difficulty)
+    {
+        LevelDifficulty = difficulty;
     }
 }

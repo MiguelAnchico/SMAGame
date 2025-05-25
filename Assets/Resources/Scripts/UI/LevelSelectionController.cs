@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelSelectionController : MonoBehaviour
 {
     public GameObject levelSelectionPanel;
+    public GameObject newGamePanel;
     public GameObject mainMenuPanel;
 
     // Method to load the selected level
@@ -18,6 +19,7 @@ public class LevelSelectionController : MonoBehaviour
     public void ReturnToMainMenu()
     {
         levelSelectionPanel.SetActive(false);  // Hide the level selection panel
+        newGamePanel.SetActive(false);
         mainMenuPanel.SetActive(true);         // Show the main menu
     }
 }

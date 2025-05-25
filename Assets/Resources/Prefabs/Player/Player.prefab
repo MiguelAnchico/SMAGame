@@ -180,7 +180,7 @@ MonoBehaviour:
     m_ActionName: 'Game/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2603476705197036360}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0

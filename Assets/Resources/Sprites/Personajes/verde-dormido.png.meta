@@ -1,0 +1,399 @@
+fileFormatVersion: 2
+guid: 7261d3c8002064d268858991f3cd87b7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8679010450793675235
+    second: verde-dormido_0
+  - first:
+      213: 4392191824964520745
+    second: verde-dormido_1
+  - first:
+      213: -5291185747046925735
+    second: verde-dormido_2
+  - first:
+      213: 7910376235393583617
+    second: verde-dormido_3
+  - first:
+      213: -5965605790647573698
+    second: verde-dormido_4
+  - first:
+      213: 1731275736177397220
+    second: verde-dormido_5
+  - first:
+      213: -8226476965560245390
+    second: verde-dormido_6
+  - first:
+      213: -8951246749313208228
+    second: verde-dormido_7
+  - first:
+      213: 7921088622771154019
+    second: verde-dormido_8
+  - first:
+      213: -7955363024459741947
+    second: verde-dormido_9
+  - first:
+      213: -1767767340337890858
+    second: verde-dormido_10
+  - first:
+      213: -3357454650827376054
+    second: verde-dormido_11
+  - first:
+      213: 2386692463019386152
+    second: verde-dormido_12
+  - first:
+      213: -4042354845421452545
+    second: verde-dormido_13
+  - first:
+      213: -3325882105245364513
+    second: verde-dormido_14
+  - first:
+      213: -925329346900257034
+    second: verde-dormido_15
+  - first:
+      213: 8955059151752166642
+    second: verde-dormido_16
+  - first:
+      213: -5128472647123601297
+    second: verde-dormido_17
+  - first:
+      213: 6902658502583213817
+    second: verde-dormido_18
+  - first:
+      213: -29373200640929455
+    second: verde-dormido_19
+  - first:
+      213: 976694866256884593
+    second: verde-dormido_20
+  - first:
+      213: -6276851145198402822
+    second: verde-dormido_21
+  - first:
+      213: -8099622079437646261
+    second: verde-dormido_22
+  - first:
+      213: 2856539607635419166
+    second: verde-dormido_23
+  - first:
+      213: 8012571534737434565
+    second: verde-dormido_24
+  - first:
+      213: 4890051379643002010
+    second: verde-dormido_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: verde-dormido_5
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 1313
+        width: 479
+        height: 673
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ed4b1ffb1ab60810800000000000000
+      internalID: 1731275736177397220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: verde-dormido_8
+      rect:
+        serializedVersion: 2
+        x: 1403
+        y: 1313
+        width: 492
+        height: 681
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36ca9aa722c5ded60800000000000000
+      internalID: 7921088622771154019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: verde-dormido_10
+      rect:
+        serializedVersion: 2
+        x: 2483
+        y: 1313
+        width: 484
+        height: 667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d97f9158f0a777e0800000000000000
+      internalID: -1767767340337890858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: verde-dormido_13
+      rect:
+        serializedVersion: 2
+        x: 4643
+        y: 1313
+        width: 474
+        height: 678
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff243967faba6e7c0800000000000000
+      internalID: -4042354845421452545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: verde-dormido_16
+      rect:
+        serializedVersion: 2
+        x: 5723
+        y: 1313
+        width: 490
+        height: 681
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fc7cc24ad2c64c70800000000000000
+      internalID: 8955059151752166642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: verde-dormido_18
+      rect:
+        serializedVersion: 2
+        x: 6803
+        y: 1313
+        width: 530
+        height: 707
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fe5d44165b2bcf50800000000000000
+      internalID: 6902658502583213817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: verde-dormido_20
+      rect:
+        serializedVersion: 2
+        x: 3563
+        y: 1313
+        width: 524
+        height: 689
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 173703d5ecaed8d00800000000000000
+      internalID: 976694866256884593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: verde-dormido_24
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 233
+        width: 529
+        height: 696
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c76e61cb5f523f60800000000000000
+      internalID: 8012571534737434565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a7dec221188484d209c88a7f30664ab0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      verde-dormido_0: -8679010450793675235
+      verde-dormido_1: 4392191824964520745
+      verde-dormido_10: -1767767340337890858
+      verde-dormido_11: -3357454650827376054
+      verde-dormido_12: 2386692463019386152
+      verde-dormido_13: -4042354845421452545
+      verde-dormido_14: -3325882105245364513
+      verde-dormido_15: -925329346900257034
+      verde-dormido_16: 8955059151752166642
+      verde-dormido_17: -5128472647123601297
+      verde-dormido_18: 6902658502583213817
+      verde-dormido_19: -29373200640929455
+      verde-dormido_2: -5291185747046925735
+      verde-dormido_20: 976694866256884593
+      verde-dormido_21: -6276851145198402822
+      verde-dormido_22: -8099622079437646261
+      verde-dormido_23: 2856539607635419166
+      verde-dormido_24: 8012571534737434565
+      verde-dormido_25: 4890051379643002010
+      verde-dormido_3: 7910376235393583617
+      verde-dormido_4: -5965605790647573698
+      verde-dormido_5: 1731275736177397220
+      verde-dormido_6: -8226476965560245390
+      verde-dormido_7: -8951246749313208228
+      verde-dormido_8: 7921088622771154019
+      verde-dormido_9: -7955363024459741947
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

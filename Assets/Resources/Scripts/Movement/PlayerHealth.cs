@@ -63,7 +63,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         
         // Efecto visual de daño
         StartCoroutine(FlashDamage());
-        
+
         // Notificar cambio de salud
         if (OnPlayerHealthChanged != null)
         {
@@ -76,6 +76,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
         else
         {
+            StartCoroutine(TemporaryDisableControls(0.1f));
             // Periodo de invulnerabilidad después de recibir daño
             StartCoroutine(InvulnerabilityPeriod());
         }
@@ -117,6 +118,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     private IEnumerator InvulnerabilityPeriod()
     {
+        yield return new WaitForSeconds(0.3f);
         isInvulnerable = true;
         
         // Efecto visual de parpadeo durante invulnerabilidad
@@ -176,6 +178,23 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         
         // Desactivar controles del jugador
         DisablePlayerControls();
+    }
+
+    private IEnumerator TemporaryDisableControls(float duration)
+    {
+        // Desactivar movimiento del jugador
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
+        
+        yield return new WaitForSeconds(duration);
+        
+        // Reactivar movimiento del jugador
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+        }
     }
     
     private void DisablePlayerControls()

@@ -26,6 +26,41 @@ public class TaskManager : MonoBehaviour
     private bool allTasksCompletedEventFired = false;
     private bool allTasksFinishedEventFired = false;
 
+    private void Start()
+    {
+        // Reconfigurar referencias para la escena actual
+        ReconfigureReferences();
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        // Unity legacy - se llama cuando cambia la escena
+        ReconfigureReferences();
+    }
+
+    private void ReconfigureReferences()
+    {
+        // Buscar el TaskUIManager en la nueva escena
+        if (taskUIManager == null)
+        {
+            taskUIManager = FindObjectOfType<TaskUIManager>();
+        }
+        
+        // Buscar el NotificationManager en la nueva escena
+        if (notificationManager == null)
+        {
+            notificationManager = FindObjectOfType<NotificationManager>();
+        }
+
+        // Actualizar el UI si existe
+        if (taskUIManager != null)
+        {
+            taskUIManager.RefreshUI();
+        }
+
+        Debug.Log($"🔗 Referencias reconfiguradas para nueva escena");
+    }
+
     private void Awake()
     {
         if (Instance == null)

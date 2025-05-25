@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1145004721698441719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1135379962152129677}
+  - component: {fileID: 8080452918342943327}
+  - component: {fileID: 8983267585183682977}
+  m_Layer: 0
+  m_Name: TaskSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1135379962152129677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145004721698441719}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 956.5554, y: 525.7753, z: 4.9976873}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8080452918342943327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145004721698441719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94c3f020622c594f83ddda4f5a3c283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskUIManager: {fileID: 8983267585183682977}
+  notificationManager: {fileID: 0}
+  OnAllTasksCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllTasksFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTaskCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTaskFailed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8983267585183682977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145004721698441719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d7b4b3a1135d94c9a52a75f791744c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskPanel: {fileID: 0}
+  task1Text: {fileID: 0}
+  task2Text: {fileID: 0}
+  task3Text: {fileID: 0}
+  task1StatusImage: {fileID: 0}
+  task2StatusImage: {fileID: 0}
+  task3StatusImage: {fileID: 0}
+  inProgressSprite: {fileID: 5256010866941707786, guid: 4eb7a0b207a224008af765c9ca667312, type: 3}
+  completedSprite: {fileID: 2853050544670637378, guid: ce5ccf77b7e394f2480a9cf7efbaadd4, type: 3}
+  incompleteSprite: {fileID: -6273641919287977789, guid: 5f3d0757e73544df2a1c887b16765b8b, type: 3}
+  taskManager: {fileID: 8080452918342943327}

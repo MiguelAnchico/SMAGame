@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-  public NPCDialogue npcDialogue; 
+  public NPCDialogue npcDialogue;
+  public string name;
 }
