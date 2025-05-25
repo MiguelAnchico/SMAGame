@@ -5,6 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [SerializeField] private float pushForce = 10f; // Fuerza con la que empujaremos al enemigo
+    [SerializeField] private float pushDuration = 0.3f; // Duración del empuje
     [SerializeField] private float lifeTime = 0.05f; // Duración del ataque en segundos (50 milisegundos)
     [SerializeField] private int damageAmount = 20; // Cantidad de daño que inflige este ataque
     
@@ -30,14 +31,25 @@ public class Attack : MonoBehaviour
             // Calculamos la dirección desde el jugador hacia el enemigo
             Vector2 direction = (collision.transform.position - playerTransform.position).normalized;
             
+            // Buscar y stunear el EnemyMovement si existe
+            EnemyMovement enemyMovement = collision.GetComponent<EnemyMovement>();
+            if (enemyMovement != null)
+            {
+                enemyMovement.StunEnemy(pushDuration); // Stunear durante el empuje
+            }
+            
             // Obtenemos el Rigidbody2D del enemigo para aplicar la fuerza
             Rigidbody2D enemyRigidbody = collision.GetComponent<Rigidbody2D>();
             
-            // Si el enemigo tiene un Rigidbody2D, le aplicamos la fuerza en dirección contraria
+            // Si el enemigo tiene un Rigidbody2D, le aplicamos la fuerza física
             if (enemyRigidbody != null)
             {
-                // Aplicamos la fuerza en dirección contraria (multiplicando por -1)
                 enemyRigidbody.AddForce(direction * pushForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                // Si no tiene Rigidbody2D, usar empuje por Transform
+                StartCoroutine(PushByTransform(collision.transform, direction));
             }
             
             // Buscamos el componente IDamageable en el enemigo para aplicar daño
@@ -53,5 +65,27 @@ public class Attack : MonoBehaviour
                 Debug.LogWarning($"El enemigo {collision.gameObject.name} no tiene un componente IDamageable");
             }
         }
+    }
+
+    private IEnumerator PushByTransform(Transform enemyTransform, Vector2 direction)
+    {
+        Vector3 startPosition = enemyTransform.position;
+        Vector3 targetPosition = startPosition + (Vector3)(direction * pushForce * 0.1f); // Reducir distancia para Transform
+        
+        float elapsed = 0f;
+        
+        while (elapsed < pushDuration)
+        {
+            float progress = elapsed / pushDuration;
+            float easedProgress = 1f - (progress - 1f) * (progress - 1f); // Easing out para suavizar
+            
+            enemyTransform.position = Vector3.Lerp(startPosition, targetPosition, easedProgress);
+            
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        
+        // Asegurar posición final
+        enemyTransform.position = targetPosition;
     }
 }

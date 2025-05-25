@@ -93,6 +93,12 @@ public class TaskManager : MonoBehaviour
             task.isCompleted = true;
             Debug.Log($"✅ Tarea completada: {task.title}");
             
+            // Modificar estado de procrastinación al completar tarea
+            if (GameStateManager.Instance != null)
+            {
+                GameStateManager.Instance.SubtractFromState(0.5f);
+            }
+            
             // Disparar evento de tarea individual completada
             OnTaskCompleted?.Invoke(id);
             
@@ -199,7 +205,11 @@ public class TaskManager : MonoBehaviour
                     
                     // Marcar la tarea como fallida
                     currentTask.MarkAsFailed();
-                    
+
+                    if (GameStateManager.Instance != null)
+                    {
+                        GameStateManager.Instance.AddToState(0.5f);
+                    }
                     // Disparar evento de tarea individual fallida
                     OnTaskFailed?.Invoke(currentTask.id);
                     

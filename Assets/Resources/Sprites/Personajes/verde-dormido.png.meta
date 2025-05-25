@@ -193,8 +193,8 @@ TextureImporter:
         serializedVersion: 2
         x: 323
         y: 1313
-        width: 479
-        height: 673
+        width: 489
+        height: 672
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,9 +213,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1403
-        y: 1313
-        width: 492
-        height: 681
+        y: 1308
+        width: 491
+        height: 672
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,10 +233,10 @@ TextureImporter:
       name: verde-dormido_10
       rect:
         serializedVersion: 2
-        x: 2483
-        y: 1313
-        width: 484
-        height: 667
+        x: 2479
+        y: 1302
+        width: 491
+        height: 678
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,8 +298,8 @@ TextureImporter:
         serializedVersion: 2
         x: 6803
         y: 1313
-        width: 530
-        height: 707
+        width: 474
+        height: 684
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,8 +319,8 @@ TextureImporter:
         serializedVersion: 2
         x: 3563
         y: 1313
-        width: 524
-        height: 689
+        width: 490
+        height: 674
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,8 +340,8 @@ TextureImporter:
         serializedVersion: 2
         x: 323
         y: 233
-        width: 529
-        height: 696
+        width: 492
+        height: 667
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

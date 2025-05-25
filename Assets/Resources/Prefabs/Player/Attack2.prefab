@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 138, y: 998, z: -12.3807}
-  m_LocalScale: {x: 25, y: 25, z: 1}
+  m_LocalScale: {x: 38.48, y: 38.48, z: 1.5392}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,9 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483e34d9bea724593a291469b66ab603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 15
+  pushForce: 250
+  pushDuration: 0.3
   lifeTime: 0.05
-  damageAmount: 20
+  damageAmount: 40
 --- !u!61 &-3813205721751802663
 BoxCollider2D:
   m_ObjectHideFlags: 0

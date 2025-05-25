@@ -6,7 +6,7 @@ public class GameStateManager : MonoBehaviour
     public static GameStateManager Instance { get; private set; }
 
     // Estado del juego (0 a 1)
-    private float gameState = 0f;
+    private float gameState = 0.5f;
 
     // Dificultad del nivel (0, 1, 2)
     private int levelDifficulty = 0;
@@ -48,11 +48,13 @@ public class GameStateManager : MonoBehaviour
     public void AddToState(float amount)
     {
         GameState = Mathf.Clamp01(gameState + amount);
+        Debug.Log($"Estado del juego actualizado: {gameState}");
     }
 
     public void SubtractFromState(float amount)
     {
         GameState = Mathf.Clamp01(gameState - amount);
+        Debug.Log($"Estado del juego actualizado: {gameState}");
     }
 
     // Métodos para modificar la dificultad del nivel

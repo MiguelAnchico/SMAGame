@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Intro.unity
     guid: a0e01edb3de554493858dce74132915b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Mendez.unity
     guid: 524580f81c460d948990ed6b79443947
   m_configObjects:

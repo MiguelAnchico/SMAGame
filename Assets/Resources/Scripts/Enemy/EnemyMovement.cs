@@ -23,6 +23,10 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator; // Referencia al componente Animator
     private SpriteRenderer spriteRenderer; // Referencia al componente SpriteRenderer
     
+    [Header("Stun System")]
+    private bool isStunned = false;
+    private float stunEndTime = 0f;
+    
     private Vector3 initialPosition;
     private Vector3 currentTarget;
     private bool isChasing = false;
@@ -44,10 +48,38 @@ public class EnemyMovement : MonoBehaviour
         
         // Inicializar la dirección de movimiento
         lastMoveDirection = Vector2.right;
+
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+                Debug.Log("Jugador encontrado automáticamente");
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró ningún objeto con tag 'Player'");
+            }
+        }
     }
 
     void Update()
     {
+        // Verificar si el stun ha terminado
+        if (isStunned && Time.time >= stunEndTime)
+        {
+            isStunned = false;
+        }
+        
+        // Si está stunned, no hacer movimiento
+        if (isStunned)
+        {
+            // Actualizar animaciones para mostrar que está quieto
+            UpdateAnimationAndDirection();
+            return;
+        }
+
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         // Solo detectar al jugador si no está en modo one-way movement
@@ -151,7 +183,12 @@ public class EnemyMovement : MonoBehaviour
         // Determinar si está en movimiento
         bool isMoving = false;
         
-        if (oneWayMovement)
+        // Si está stunned, no está en movimiento
+        if (isStunned)
+        {
+            isMoving = false;
+        }
+        else if (oneWayMovement)
         {
             // En modo one-way, está en movimiento solo si no ha llegado al destino final
             isMoving = !hasReachedFinalDestination;
@@ -180,6 +217,18 @@ public class EnemyMovement : MonoBehaviour
             // Si el movimiento es hacia la derecha, no voltear el sprite
             spriteRenderer.flipX = (lastMoveDirection.x > 0);
         }
+    }
+
+    // Métodos públicos para el sistema de stun
+    public void StunEnemy(float duration)
+    {
+        isStunned = true;
+        stunEndTime = Time.time + duration;
+    }
+
+    public bool IsStunned()
+    {
+        return isStunned;
     }
 
     // Método público para resetear el estado one-way (útil para reutilizar el enemigo)

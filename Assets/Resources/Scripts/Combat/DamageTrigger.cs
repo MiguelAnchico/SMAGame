@@ -15,7 +15,13 @@ public class DamageTrigger : MonoBehaviour
     public bool destroyAfterUse = false;
     public bool oneTimeUse = true;
     
+    [Header("Continuous Attack Settings")]
+    public float attackInterval = 1f;
+    
     private bool hasBeenUsed = false;
+    private bool playerInside = false;
+    private PlayerHealth currentPlayerHealth;
+    private Coroutine continuousAttackCoroutine;
 
     void Start()
     {
@@ -36,30 +42,62 @@ public class DamageTrigger : MonoBehaviour
             if (oneTimeUse && hasBeenUsed)
                 return;
 
-            // Buscar el componente de salud del jugador
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            playerInside = true;
+            currentPlayerHealth = other.GetComponent<PlayerHealth>();
             
-            if (playerHealth != null)
+            if (currentPlayerHealth != null)
             {
-                // Verificar si el jugador tiene invulnerabilidad activa
-                if (playerHealth.IsInvulnerable())
-                    return;
+                // Iniciar ataque continuo
+                continuousAttackCoroutine = StartCoroutine(ContinuousAttack(other));
+            }
+        }
+    }
 
-                // Aplicar daño (el PlayerHealth se encarga de sonidos y efectos)
-                playerHealth.TakeDamage(damageAmount);
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInside = false;
+            currentPlayerHealth = null;
+            
+            // Detener ataque continuo
+            if (continuousAttackCoroutine != null)
+            {
+                StopCoroutine(continuousAttackCoroutine);
+                continuousAttackCoroutine = null;
+            }
+        }
+    }
+
+    private IEnumerator ContinuousAttack(Collider2D player)
+    {
+        while (playerInside && currentPlayerHealth != null)
+        {
+            // Verificar si el jugador tiene invulnerabilidad activa
+            if (!currentPlayerHealth.IsInvulnerable())
+            {
+                // Aplicar daño
+                currentPlayerHealth.TakeDamage(damageAmount);
                 
                 // Aplicar empuje
-                ApplyKnockback(other);
+                ApplyKnockback(player);
                 
-                // Marcar como usado
-                hasBeenUsed = true;
-                
-                // Destruir el objeto si está configurado para ello
-                if (destroyAfterUse)
+                // Marcar como usado si es de un solo uso
+                if (oneTimeUse)
                 {
-                    Destroy(gameObject);
+                    hasBeenUsed = true;
+                    
+                    // Destruir el objeto si está configurado para ello
+                    if (destroyAfterUse)
+                    {
+                        Destroy(gameObject);
+                        yield break;
+                    }
                 }
             }
+            
+            // Esperar el intervalo antes del siguiente ataque
+            yield return new WaitForSeconds(attackInterval);
         }
     }
     
@@ -76,7 +114,6 @@ public class DamageTrigger : MonoBehaviour
         }
     }
 
-    
     // Método público para resetear el trigger (útil si quieres reutilizarlo)
     public void ResetTrigger()
     {

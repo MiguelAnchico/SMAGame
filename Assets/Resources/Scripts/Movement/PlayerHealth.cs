@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private int currentHealth;
     
     [Header("Invulnerability")]
-    public float invulnerabilityTime = 1.0f;
+    public float invulnerabilityTime = 2.0f;
     private bool isInvulnerable = false;
     
     [Header("Audio")]
@@ -118,7 +118,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     private IEnumerator InvulnerabilityPeriod()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         isInvulnerable = true;
         
         // Efecto visual de parpadeo durante invulnerabilidad

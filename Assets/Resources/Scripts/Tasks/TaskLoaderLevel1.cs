@@ -20,9 +20,9 @@ public class TaskLoaderLevel1 : MonoBehaviour
         float difficultyMultiplier = GetDifficultyMultiplier();
 
         // Crear tareas con tiempo ajustado por dificultad
-        taskManager.AddTask(new Task(1, "Aprende a moverte", "Habla con Ethan", true, 0f, true, audio1));
-        taskManager.AddTask(new Task(2, "Aprende a saltar", "Derrota a Somnior", true, 50f * difficultyMultiplier, false, audio2));
-        taskManager.AddTask(new Task(3, "Aprende a atacar", "Habla denuevo con Ethan", true, 0f, true, audio3));
+        taskManager.AddTask(new Task(1, "Ayudemos a Ethan", "Habla con Ethan", true, 0f, true, audio1));
+        taskManager.AddTask(new Task(2, "Pelea", "Derrota a Somnior", true, 70f * difficultyMultiplier, false, audio2));
+        taskManager.AddTask(new Task(3, "Ethan", "Habla denuevo con Ethan", true, 0f, true, audio3));
 
         Debug.Log($"📋 Tareas cargadas con multiplicador de dificultad: {difficultyMultiplier}");
     }

@@ -107,8 +107,23 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         // Desactivar físicas y colisiones
         DisablePhysicsAndCollisions();
         
-        // Destruir el objeto después de 0.5 segundos
-        Destroy(gameObject, 0.5f);
+        // Destruir el contenedor padre en lugar del objeto actual
+        DestroyParentContainer();
+    }
+
+    private void DestroyParentContainer()
+    {
+        if (transform.parent != null)
+        {
+            Debug.Log($"Destruyendo contenedor padre: {transform.parent.name}");
+            Destroy(transform.parent.gameObject, 0.5f);
+        }
+        else
+        {
+            // Si no tiene padre, destruirse a sí mismo
+            Debug.Log("No hay contenedor padre, destruyendo enemigo directamente");
+            Destroy(gameObject, 0.5f);
+        }
     }
 
     private void DisablePhysicsAndCollisions()
