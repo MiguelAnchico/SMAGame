@@ -169,15 +169,32 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             OnPlayerDeath();
         }
-        
+
         // Activar animación de muerte
-        if (animator != null)
+        if (animator != null && HasParameter(animator, "die"))
         {
             animator.SetBool("die", true);
         }
-        
+
+        // Mostrar pantalla de Game Over
+        GameOverManager gameOverManager = FindObjectOfType<GameOverManager>();
+        if (gameOverManager != null)
+        {
+            gameOverManager.ShowGameOver();
+        }
+
         // Desactivar controles del jugador
         DisablePlayerControls();
+    }
+
+    // Función auxiliar para verificar si el Animator tiene un parámetro con ese nombre
+    private bool HasParameter(Animator anim, string paramName)
+    {
+        foreach (AnimatorControllerParameter param in anim.parameters)
+        {
+            if (param.name == paramName) return true;
+        }
+        return false;
     }
 
     private IEnumerator TemporaryDisableControls(float duration)

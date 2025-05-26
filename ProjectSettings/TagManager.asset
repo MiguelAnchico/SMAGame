@@ -8,6 +8,7 @@ TagManager:
   - NPC
   - EnemyTest
   - Enemy
+  - DamageZone
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Projectile
+    uniqueID: 2703514341
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
